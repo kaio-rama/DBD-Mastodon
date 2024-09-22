@@ -1,0 +1,37 @@
+---
+ // JavaScript code here
+---
+
+<nav class="py-8 mx-auto text-center">
+    <a href="/home"><span class="text-gradient"> Home</span></a>
+    <a href=""><span class="text-gradient">Notifications</span></a>
+    <a href=""><span class="text-gradient">Explore</span></a>
+    <a href=""><span class="text-gradient">Guardados</span></a>
+    <a href=""><span class="text-gradient">Favoritos</span></a>
+    <a href=""><span class="text-gradient">Perfil</span></a>
+    <a href="/about"><span class="text-gradient">About</span></a>
+    <a href="/"><span class="text-gradient">Index DBD Mastodon</span></a>
+</nav>
+
+<style>
+
+    nav{
+        position: sticky;
+        top: 0;
+        background: #13151a;
+        z-index: 10;
+    }
+    .text-gradient:hover {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+
+    a{
+        margin: 0 10px;
+        font-size: large;
+    }
+
+</style>

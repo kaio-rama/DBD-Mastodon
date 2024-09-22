@@ -1,0 +1,25 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About" description="This is the about page of the project." page='About DBD'>
+    <Navbar />
+    <div>
+    <h1 class="text-2xl font-bold text-white mx-10"> About </h1>
+    <p> Die-Bart-Die application was created as a graphical enhancement of Mastodon, designed to offer a more visually appealing and modern experience without compromising the platform's core functionality and essence. Inspired by the growing need for user-friendly, fast, and aesthetically advanced interfaces, this open-source project led by kaio-rama aims to provide a new way to interact with decentralized social networks.</p> 
+    <p> I believe in the power of open source to create collaborative solutions, which is why I invite the developer and design community to join this project, contribute, and be part of a visual evolution that promotes freedom of expression online.</p> 
+    <p> The project is open-source and available on <a class="text-fuchsia-300" href="https://github.com/kaio-rama/DBD-Mastodon">GitHub</a>, where you can find the source code, report bugs, and contribute to the development. If you have any questions or suggestions, feel free to reach out to me on <a class="text-fuchsia-300" href="https://defcon.social/@kaio_rama"> Mastodon. </a></p>
+</div> 
+</Layout>
+
+<style>
+    div{
+        font-size: large;
+        padding: 15px;
+        margin: 25px;
+    }
+    p{
+        margin: 25px;
+    }
+</style>

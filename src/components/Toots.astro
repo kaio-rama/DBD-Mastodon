@@ -1,0 +1,129 @@
+---
+import { get } from "../pages/API/mastodon-timeline.js";
+
+export interface Toot {
+  id: string;
+  content: string;
+  account: {
+    username: string;
+    acct: string;
+    display_name: string;
+    avatar: string;
+    uri: string;
+    url: string;
+
+  };
+  card?:{
+    image: string;
+    description: string;
+    url: string;
+  };
+  reblog?:{
+    id: string;
+    url: string;
+    uri: string;
+    media_attachments: Array<{
+      preview_url: string;
+      type: string;
+      url: string;
+      remote_url: string;
+      preview_remote_url: string;
+      text_url: string;
+      meta: Record<string, any>;
+      description: string;
+      blurhash: string;
+    }>;
+    account: {
+      username: string;
+      display_name: string;
+      avatar: string;
+      url: string;
+      uri: string;
+    };
+    content: string;
+    card?:{
+      image: string;
+      description: string;
+    };
+  }
+}
+
+const response = await get();
+const toots: Toot[] = await response.json();
+
+---
+
+<div class="toot-container">   
+    {toots.map((toot) => (
+      <div id={toot.id} class="toot mb-2 bg-gray-900 w-1/3 min-h-28 rounded-lg p-4 shadow-md"> 
+        <div class="flex justify-between">
+        <img src={toot.account.avatar} alt={`Avatar of ${toot.account.username}`} width="50" height="50" /> 
+          <p>
+            <a href={toot.account.url || toot.account.uri} >             
+            <strong>{toot.account.username || toot.account.display_name}</strong><br />
+            </a>
+            <i class="text-gray-400" >{toot.account.acct}</i>
+          </p>
+        </div>
+        <div class="my-4" set:html={toot.content}></div>
+
+        <!--- IF CARD EXISTS RENDER THEM -->
+                {toot.card && (
+                  <div class="toot-card">
+                      <p>{toot.card.description}</p>
+                      <img src={toot.card.image} alt={`Image of ${toot.card.description}`} width="auto" height="auto" class="my-4"/> 
+                      <a class="text-fuchsia-300" href={toot.card.url}>Ver más...</a>
+                  </div>
+                )}
+
+                 <!--  IF REBLOG (Boost) EXISTS RENDER THEM -->
+                {toot.reblog && (
+                  <div class="toot-card">      
+                      <img  src={toot.reblog.account.avatar} 
+                            class="rounded-lg relative -top-8 -right-4"
+                            alt={`Avatar of ${toot.reblog.account.username}`} 
+                            width="50" height="50" /> 
+                      <p class="mb-6 -mt-6 ml-2">Boost de <a href={toot.reblog.account.url || toot.reblog.account.uri}>{toot.reblog.account.username || toot.reblog.account.display_name}</a></p> 
+                      <div class=" my-4" set:html={toot.reblog.content}></div>
+
+                      <!-- IF REBLOG CARD EXISTS RENDER THEM -->
+                      {toot.reblog.card && (
+                        <div class="toot-card">
+                            <img src={toot.reblog.card.image} alt={`Image of ${toot.reblog.card.description}`} width="100%" height="auto" />
+                            <p class="my-4">{toot.reblog.card.description}</p>
+                        </div>
+                      )}
+
+                      <!-- IF REBLOG MEDIA EXISTS RENDER THEM -->
+                      {toot.reblog.media_attachments && (
+                        <div class="toot-media">
+                          {toot.reblog.media_attachments.map((media) => (
+                            <img src={media.preview_url} alt={`Image of ${media.description}`} width="100%" height="auto" class="my-4"/> 
+                          ))}
+                        </div>
+                      )}
+                      
+                      <a class="text-fuchsia-300" href={toot.reblog.url}>Ver más... </a>
+                  </div>
+                )}
+              </div>
+    ))}
+  </div>
+
+  <style>
+    .toot-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    @media (max-width: 768px) {
+      .toot{
+        width: 98%;
+      }
+    }
+    
+    </style>
+    
