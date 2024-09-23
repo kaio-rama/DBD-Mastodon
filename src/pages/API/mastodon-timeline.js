@@ -1,5 +1,7 @@
+import { API_KEY } from './api-keys.js';
+
 export async function get() {
-  const accessToken = '';
+  const accessToken = API_KEY;
   const instanceUrl = 'https://defcon.social';  
   
   try {
