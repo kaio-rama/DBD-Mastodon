@@ -5,6 +5,6 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  base: '/DBD-Mastodon/',
+  base: '/DBD-Mastodon/dist',
   integrations: [tailwind()]
 });
