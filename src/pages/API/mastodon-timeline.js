@@ -1,5 +1,5 @@
 export async function get() {
-  const accessToken = 'A04OIgVLEHloZoQOAivpie2FliuPBvt0v7-PztMQtoM';
+  const accessToken = '';
   const instanceUrl = 'https://defcon.social';  
   
   try {
